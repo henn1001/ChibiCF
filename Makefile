@@ -1,0 +1,1 @@
+include source/targets/cc3d/fw/Makefile
