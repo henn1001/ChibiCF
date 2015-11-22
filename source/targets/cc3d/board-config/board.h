@@ -18,30 +18,20 @@
 #define _BOARD_H_
 
 /*
- * Setup for the ST INEMO-M1 Discovery board.
+ * Setup for the LeafLabs Maple Mini.
  */
 
 /*
  * Board identifier.
  */
-#define BOARD_ST_NUCLEO_F103RB
-#define BOARD_NAME              "STMicroelectronics NUCLEO-F103RB"
+#define BOARD_CC3D
+#define BOARD_NAME              "CC3D"
 
 /*
  * Board frequencies.
  */
 #define STM32_LSECLK            0
-
-#if defined(NUCLEO_EXTERNAL_OSCILLATOR)
 #define STM32_HSECLK            8000000
-#define STM32_HSE_BYPASS
-
-#elif defined(NUCLEO_HSE_CRYSTAL)
-#define STM32_HSECLK            8000000
-
-#else
-#define STM32_HSECLK            0
-#endif
 
 /*
  * MCU type, supported types are defined in ./os/hal/platforms/hal_lld.h.
@@ -51,60 +41,47 @@
 /*
  * IO pins assignments.
  */
-#define GPIOA_PA0               0
-#define GPIOA_PA1               1
-#define GPIOA_USART_TX          2
-#define GPIOA_USART_RX          3
-#define GPIOA_PA4               4
-#define GPIOA_LED_GREEN         5
-#define GPIOA_PA6               6
-#define GPIOA_PA7               7
-#define GPIOA_PA8               8
-#define GPIOA_PA9               9
-#define GPIOA_PA10              10
-#define GPIOA_PA11              11
-#define GPIOA_PA12              12
+#define GPIOA_S5_IN             0
+#define GPIOA_S6_IN             1
+#define GPIOA_S6_OUT            2
+#define GPIOA_GYRO_INT          3  //MPU6000
+#define GPIOA_SPI1_NSS          4  //*
+#define GPIOA_SPI1_SCK          5  //*
+#define GPIOA_SPI1_MISO         6  //*
+#define GPIOA_SPI1_MOSI         7  //MPU6000
+#define GPIOA_S4_OUT            8
+#define GPIOA_UART1_TX          9  //Main-Port
+#define GPIOA_UART1_RX          10 //Main-Port
+#define GPIOA_USB_DN            11
+#define GPIOA_USB_DP            12
 #define GPIOA_SWDIO             13
 #define GPIOA_SWCLK             14
-#define GPIOA_PA15              15
+//#define GPIOA_JTDI            15 Not Connected
 
-#define GPIOB_PB0               0
-#define GPIOB_PB1               1
-#define GPIOB_PB2               2
-#define GPIOB_SWO               3
-#define GPIOB_PB4               4
-#define GPIOB_PB5               5
-#define GPIOB_PB6               6
-#define GPIOB_PB7               7
-#define GPIOB_PB8               8
-#define GPIOB_PB9               9
-#define GPIOB_PB10              10
-#define GPIOB_PB11              11
-#define GPIOB_PB12              12
-#define GPIOB_PB13              13
-#define GPIOB_PB14              14
-#define GPIOB_PB15              15
+#define GPIOB_S3_IN             0
+#define GPIOB_S4_IN             1
+#define GPIOB_INVERTER          2  //Main-Port-Inverter
+#define GPIOB_LED_BLUE          3
+#define GPIOB_S5_OUT            4
+#define GPIOB_S2_IN             5
+#define GPIOB_S1_IN             6
+#define GPIOB_S3_OUT            7
+#define GPIOB_S2_OUT            8
+#define GPIOB_S1_OUT            9
+#define GPIOB_UART3_RX          10 //Flexi-Port
+#define GPIOB_UART3_TX          11 //Flexi-Port
+#define GPIOB_CS_FLSH           12 //Flash-Storage
+#define GPIOB_SPI2_SCLK         13 //*
+#define GPIOB_SPI2_MISO        14 //*
+#define GPIOB_SPI2_MOSI         15 //Flash-Storage
 
-#define GPIOC_PC0               0
-#define GPIOC_PC1               1
-#define GPIOC_PC2               2
-#define GPIOC_PC3               3
-#define GPIOC_PC4               4
-#define GPIOC_PC5               5
-#define GPIOC_PC6               6
-#define GPIOC_PC7               7
-#define GPIOC_PC8               8
-#define GPIOC_PC9               9
-#define GPIOC_PC10              10
-#define GPIOC_PC11              11
-#define GPIOC_PC12              12
-#define GPIOC_BUTTON            13
-#define GPIOC_PC14              14
-#define GPIOC_PC15              15
+
+//#define GPIOC_PC13            13 Not Connected
+#define GPIOC_VBUS Sense        14
+//#define GPIOC_PC15            15 Not Connected
 
 #define GPIOD_OSC_IN            0
 #define GPIOD_OSC_OUT           1
-#define GPIOD_PD2               2
 
 /*
  * I/O ports initial setup, this configuration is established soon after reset
@@ -135,30 +112,28 @@
  * Everything input with pull-up except:
  * PA2  - Alternate output          (GPIOA_USART_TX).
  * PA3  - Normal input              (GPIOA_USART_RX).
- * PA5  - Push Pull output          (GPIOA_LED_GREEN).
  * PA13 - Pull-up input             (GPIOA_SWDIO).
  * PA14 - Pull-down input           (GPIOA_SWCLK).
  */
-#define VAL_GPIOACRL            0x88384B88      /*  PA7...PA0 */
+#define VAL_GPIOACRL            0x88884B88      /*  PA7...PA0 */
 #define VAL_GPIOACRH            0x88888888      /* PA15...PA8 */
 #define VAL_GPIOAODR            0xFFFFBFDF
 
 /*
  * Port B setup.
  * Everything input with pull-up except:
- * PB3  - Pull-up input             (GPIOA_SWO).
+ * PB3  - Push Pull output          (GPIOB_LED_BLUE).
  */
-#define VAL_GPIOBCRL            0x88888888      /*  PB7...PB0 */
+#define VAL_GPIOBCRL            0x88882888      /*  PB7...PB0 */
 #define VAL_GPIOBCRH            0x88888888      /* PB15...PB8 */
 #define VAL_GPIOBODR            0xFFFFFFFF
 
 /*
  * Port C setup.
  * Everything input with pull-up except:
- * PC13 - Normal input              (GPIOC_BUTTON).
  */
 #define VAL_GPIOCCRL            0x88888888      /*  PC7...PC0 */
-#define VAL_GPIOCCRH            0x88488888      /* PC15...PC8 */
+#define VAL_GPIOCCRH            0x88888888      /* PC15...PC8 */
 #define VAL_GPIOCODR            0xFFFFFFFF
 
 /*
@@ -182,12 +157,12 @@
 /*
  * USB bus activation macro, required by the USB driver.
  */
-#define usb_lld_connect_bus(usbp)
+#define usb_lld_connect_bus(usbp) palClearPad(GPIOB, GPIOB_USB_DISC)
 
 /*
  * USB bus de-activation macro, required by the USB driver.
  */
-#define usb_lld_disconnect_bus(usbp)
+#define usb_lld_disconnect_bus(usbp) palSetPad(GPIOB, GPIOB_USB_DISC)
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus

@@ -25,7 +25,7 @@ endif
 
 # Linker extra options here.
 ifeq ($(USE_LDOPT),)
-  USE_LDOPT = 
+  USE_LDOPT = -lm
 endif
 
 # Enable this if you want link time optimizations (LTO)
@@ -92,16 +92,18 @@ include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/startup_stm32f1xx.mk
 # HAL-OSAL files (optional).
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/hal/ports/STM32/STM32F1xx/platform.mk
-include ./source/targets/cc3d/board-config/board.mk
 include $(CHIBIOS)/os/hal/osal/rt/osal.mk
 # RTOS files (optional).
 include $(CHIBIOS)/os/rt/rt.mk
 include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 # Other files (optional).
 include $(CHIBIOS)/test/rt/test.mk
+#Target specific files
+include ./source/targets/cc3d/board-config/board.mk
 
 # Define linker script file here
-LDSCRIPT= $(STARTUPLD)/STM32F103xB.ld
+LDSCRIPT= ./source/targets/stm32_flash_f103_128k.ld
+
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -144,7 +146,7 @@ ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various 
 
 #
 # Project, sources and paths
@@ -200,7 +202,8 @@ UDEFS =
 UADEFS =
 
 # List all user directories here
-UINCDIR = source/targets/cc3d/fw
+UINCDIR = source/targets/cc3d/fw 
+        
 
 # List the user directory to look for the libraries here
 ULIBDIR =

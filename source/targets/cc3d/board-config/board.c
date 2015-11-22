@@ -15,6 +15,8 @@
 */
 
 #include "hal.h"
+#include "board-init.h"
+#include "printf.h"
 
 /**
  * @brief   PAL setup.
@@ -32,18 +34,20 @@ const PALConfig pal_default_config =
 };
 #endif
 
-/*
+/*<
  * Early initialization code.
  * This initialization must be performed just after stack setup and before
  * any other initialization.
  */
-void __early_init(void) {
-
+void __early_init(void)
+{
   stm32_clock_init();
 }
 
 /*
  * Board-specific initialization code.
  */
-void boardInit(void) {
+void boardInit(void)
+{
+  init();
 }

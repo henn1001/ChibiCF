@@ -2,5 +2,6 @@
 .git
 .project
 .cproject
+.settings
 build
 debug

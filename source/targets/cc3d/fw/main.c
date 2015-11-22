@@ -19,53 +19,44 @@
 #include "test.h"
 
 /*
- * Red LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
-
-  (void)arg;
-  chRegSetThreadName("blinker");
-  while (true) {
-    palClearPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
-    palSetPad(GPIOA, GPIOA_LED_GREEN);
-    chThdSleepMilliseconds(500);
-  }
-}
-
-/*
  * Application entry point.
  */
 int main(void) {
 
   /*
    * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
+   *
    */
   halInit();
   chSysInit();
 
-  /*
-   * Activates the serial driver 2 using the driver default configuration.
-   */
-  sdStart(&SD2, NULL);
+  static PWMConfig pwmcfg = {
+     1000000,
+     20000,
+     NULL,
+     {
+        {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+        {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+        {PWM_OUTPUT_ACTIVE_HIGH, NULL},
+        {PWM_OUTPUT_ACTIVE_HIGH, NULL}
+     },
+     0,
+     0
+  };
 
-  /*
-   * Creates the blinker thread.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  palSetPadMode(GPIOB, 9, PAL_MODE_STM32_ALTERNATE_PUSHPULL);
 
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state.
-   */
-  while (true) {
-    if (!palReadPad(GPIOC, GPIOC_BUTTON))
-      TestThread(&SD2);
-    chThdSleepMilliseconds(500);
+  pwmStart(&PWMD4, &pwmcfg);
+
+
+
+  while (true)
+  {
+    chThdSleepSeconds(1);
+    palSetPad(GPIOB, GPIOB_LED_BLUE);
+    pwmEnableChannel(&PWMD4, 3, 1400);   // 10% duty cycle
+    chThdSleepSeconds(1);
+    palClearPad(GPIOB, GPIOB_LED_BLUE);
+    pwmEnableChannel(&PWMD4, 3, 1700);   // 50% duty cycle
   }
 }

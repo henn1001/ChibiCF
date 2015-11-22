@@ -38,8 +38,8 @@
  */
 #define STM32_NO_INIT                       FALSE
 #define STM32_HSI_ENABLED                   TRUE
-#define STM32_LSI_ENABLED                   FALSE
-#define STM32_HSE_ENABLED                   FALSE
+#define STM32_LSI_ENABLED                   TRUE
+#define STM32_HSE_ENABLED                   TRUE
 #define STM32_LSE_ENABLED                   FALSE
 #define STM32_SW                            STM32_SW_PLL
 #define STM32_PLLSRC                        STM32_PLLSRC_HSI
@@ -132,10 +132,10 @@
  * PWM driver system settings.
  */
 #define STM32_PWM_USE_ADVANCED              FALSE
-#define STM32_PWM_USE_TIM1                  FALSE
+#define STM32_PWM_USE_TIM1                  TRUE
 #define STM32_PWM_USE_TIM2                  FALSE
 #define STM32_PWM_USE_TIM3                  FALSE
-#define STM32_PWM_USE_TIM4                  FALSE
+#define STM32_PWM_USE_TIM4                  TRUE
 #define STM32_PWM_USE_TIM5                  FALSE
 #define STM32_PWM_USE_TIM8                  FALSE
 #define STM32_PWM_TIM1_IRQ_PRIORITY         7
@@ -153,9 +153,9 @@
 /*
  * SERIAL driver system settings.
  */
-#define STM32_SERIAL_USE_USART1             FALSE
-#define STM32_SERIAL_USE_USART2             TRUE
-#define STM32_SERIAL_USE_USART3             FALSE
+#define STM32_SERIAL_USE_USART1             TRUE
+#define STM32_SERIAL_USE_USART2             FALSE
+#define STM32_SERIAL_USE_USART3             TRUE
 #define STM32_SERIAL_USE_UART4              FALSE
 #define STM32_SERIAL_USE_UART5              FALSE
 #define STM32_SERIAL_USART1_PRIORITY        12
@@ -167,8 +167,8 @@
 /*
  * SPI driver system settings.
  */
-#define STM32_SPI_USE_SPI1                  FALSE
-#define STM32_SPI_USE_SPI2                  FALSE
+#define STM32_SPI_USE_SPI1                  TRUE
+#define STM32_SPI_USE_SPI2                  TRUE
 #define STM32_SPI_USE_SPI3                  FALSE
 #define STM32_SPI_SPI1_DMA_PRIORITY         1
 #define STM32_SPI_SPI2_DMA_PRIORITY         1
@@ -201,7 +201,7 @@
 /*
  * USB driver system settings.
  */
-#define STM32_USB_USE_USB1                  FALSE
+#define STM32_USB_USE_USB1                  TRUE
 #define STM32_USB_LOW_POWER_ON_SUSPEND      FALSE
 #define STM32_USB_USB1_HP_IRQ_PRIORITY      13
 #define STM32_USB_USB1_LP_IRQ_PRIORITY      14

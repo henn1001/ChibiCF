@@ -62,7 +62,7 @@
  * @brief   Enables the EXT subsystem.
  */
 #if !defined(HAL_USE_EXT) || defined(__DOXYGEN__)
-#define HAL_USE_EXT                 FALSE
+#define HAL_USE_EXT                 TRUE
 #endif
 
 /**
@@ -111,7 +111,7 @@
  * @brief   Enables the PWM subsystem.
  */
 #if !defined(HAL_USE_PWM) || defined(__DOXYGEN__)
-#define HAL_USE_PWM                 FALSE
+#define HAL_USE_PWM                 TRUE
 #endif
 
 /**
@@ -139,14 +139,14 @@
  * @brief   Enables the SERIAL over USB subsystem.
  */
 #if !defined(HAL_USE_SERIAL_USB) || defined(__DOXYGEN__)
-#define HAL_USE_SERIAL_USB          FALSE
+#define HAL_USE_SERIAL_USB          TRUE
 #endif
 
 /**
  * @brief   Enables the SPI subsystem.
  */
 #if !defined(HAL_USE_SPI) || defined(__DOXYGEN__)
-#define HAL_USE_SPI                 FALSE
+#define HAL_USE_SPI                 TRUE
 #endif
 
 /**
@@ -160,7 +160,7 @@
  * @brief   Enables the USB subsystem.
  */
 #if !defined(HAL_USE_USB) || defined(__DOXYGEN__)
-#define HAL_USE_USB                 FALSE
+#define HAL_USE_USB                 TRUE
 #endif
 
 /*===========================================================================*/
@@ -326,7 +326,7 @@
  * @note    Disabling this option saves both code and data space.
  */
 #if !defined(SPI_USE_MUTUAL_EXCLUSION) || defined(__DOXYGEN__)
-#define SPI_USE_MUTUAL_EXCLUSION    TRUE
+#define SPI_USE_MUTUAL_EXCLUSION    FALSE
 #endif
 
 #endif /* _HALCONF_H_ */
